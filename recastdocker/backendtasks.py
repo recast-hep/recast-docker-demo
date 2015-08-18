@@ -10,7 +10,7 @@ def recast(ctx):
   workdir = 'workdirs/{}'.format(ctx['jobguid'])
   dockerimage = ctx['dockerimage']
 
-  cmd = 'boot2docker shellinit && docker run -v {}:/workdir {} /workdir /workdir/inputs/context.yaml'.format(
+  cmd = 'docker run -v {}:/workdir {} /workdir /workdir/inputs/context.yaml'.format(
       os.path.abspath(workdir),
       dockerimage)
 
@@ -18,6 +18,3 @@ def recast(ctx):
     proc = subprocess.check_call(cmd,shell=True, stderr = subprocess.STDOUT, stdout = dockerlog)
 
   log.info('finished successfully')
-
-def resultlist():
-  return ['Rivet.yoda','Rivet.log','plots','docker.log']
